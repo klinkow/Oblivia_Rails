@@ -7,6 +7,6 @@
   <%= f.text_field :color %>
   <%= f.label :nerd_type %>
   <%= f.text_field :nerd_type %>
-  <%= f.text_field value=@number, type="hidden" %>
+  <%= f.text_field :number, value: @number, type: "hidden" %>
   <%= f.submit "Next"%>
 <% end %>
