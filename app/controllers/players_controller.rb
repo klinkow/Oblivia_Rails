@@ -1,9 +1,21 @@
 class PlayersController < ApplicationController
 
   def make_questions(player1, player2)
-    question1 = Question.create(question: "Is the capitol of Illinois Springfield?", answer_correct: "True", answer_1: "True", answer_2: "False", correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "geography", round: 1, player: player1.name, fitb: false, mc: false, tf: true, finished: false)
-    question2 = Question.create(question: "Who framed roger rabit?", answer_correct: "Me", answer_1: "You", answer_2: "Me", answer_3: "Him", answer_4: "Her", correct_response: "Good Job.", wrong_response: "You suck.", number: 2, topic: "general knowledge", round: 1, player: player2.name, fitb: false, mc: true, tf: false, finished: false)
+    question1_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
+    question2_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False")
+
+    question1_question = HTMLEntities.new.decode(question1_api["question"])
+
+    question1 = Question.create(question: question1_question, answer_correct: "True", answer_1: "True", answer_2: "False", correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "geography", player: player1.name, correct_score: 1000, incorrect_score: 900)
+    binding.pry
+    question2 = Question.create(question: "Who framed roger rabit?", answer_correct: "Me", answer_1: "You", answer_2: "Me", answer_3: "Him", answer_4: "Her", correct_response: "Good Job.", wrong_response: "You suck.", number: 2, topic: "general knowledge", player: player2.name)
+    question3 = Question.create(question: "Where in the world is carmen san diego?", answer_correct: "San Diego", answer_1: "Carmen", answer_2: "Hell", answer_3: "San Diego", answer_4: "Springfield", correct_response: "Well done.", wrong_response: "Terrible.", number: 3, topic: "geography", player: player1.name, correct_score: 1000, incorrect_score: 900)
+    question4 = Question.create(question: "Where is Lucifer?", answer_correct: "Hell", answer_1: "Carmen", answer_2: "Hell", answer_3: "San Diego", answer_4: "Springfield", correct_response: "Well done.", wrong_response: "Terrible.", number: 4, topic: "geography", player: player2.name, correct_score: 1000, incorrect_score: 900)
+
+
+
   end
+
 
   def index
   end
@@ -17,7 +29,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params.merge(score: 0, latest_score: 0))
     if player_params[:number] === "2"
       @player.save
-      make_questions((Player.find_by number: 1), @player)
+      make_questions((Player.find_by number:1), @player)
       redirect_to question_path(Question.find_by number:1)
     elsif @player.save
       redirect_to new_player_path(2)

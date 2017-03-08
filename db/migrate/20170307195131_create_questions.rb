@@ -8,13 +8,9 @@ class CreateQuestions < ActiveRecord::Migration[5.0]
       t.string :wrong_response
       t.integer :number
       t.string :topic
-      t.integer :round
       t.string :player
-      t.boolean :fitb?
-      t.boolean :mc?
-      t.boolean :tf?
-      t.boolean :finished?
-
+      t.integer :correct_score
+      t.integer :incorrect_score
       t.timestamps
     end
   end

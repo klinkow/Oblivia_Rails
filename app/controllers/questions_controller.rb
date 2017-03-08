@@ -4,16 +4,16 @@ class QuestionsController < ApplicationController
     @player = (Player.find_by name: @question.player)
     nextquestion = Question.find_by number: (@question.number + 1)
     if params[:amount_waged]
-      @question.correct_score = params[:amount_waged].to_i
-      @question.incorrect_score = -(params[:amount_waged].to_i)
+      @question.update(correct_score: params[:amount_waged].to_i, incorrect_score: -(params[:amount_waged].to_i))
       redirect_to question_path(@question)
     elsif params[:user_answer]
       if params[:user_answer] === @question.answer_correct
-        @player.score += params[:correct_score].to_i
+        new_score = @player.score + @question.correct_score
       else
-        @player.score += params[:incorrect_score].to_i
+        new_score = @player.score + @question.incorrect_score
       end
-    redirect_to question_path(nextquestion)
+      @player.update(score: new_score)
+      redirect_to question_path(nextquestion)
     end
   end
 end

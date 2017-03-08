@@ -1,3 +1,5 @@
+<p><%= @question.player %> score: <%= @player.score %></p>
+
 <% if @question.correct_score === nil %>
   <p>This is the <%= @question.topic %> round. <%= @question.player %>, how much would you like to wager?</p><br>
   <%= link_to "0", question_path(@question, :amount_waged => 0) %>
@@ -6,12 +8,9 @@
   <%= link_to "400", question_path(@question, :amount_waged => 400) %>
 <% else %>
   <p>This is the <%= @question.topic %> round. <%= @question.question %></p>
-  <% if @question.type === "tf" %>
-    <%= link_to "True", question_path(@question, :user_answer => "true") %>
-    <%= link_to "False", question_path(@question, :user_answer => "false") %>
-  <% elsif @question.type === "mc" %>
-    <%= link_to @question.answer_1, question_path(@question, :user_answer => @question.answer_1) %>
-    <%= link_to @question.answer_2, question_path(@question, :user_answer => @question.answer_2) %>
+  <%= link_to @question.answer_1, question_path(@question, :user_answer => @question.answer_1) %>
+  <%= link_to @question.answer_2, question_path(@question, :user_answer => @question.answer_2) %>
+  <% if @question.answer_3 %>
     <%= link_to @question.answer_3, question_path(@question, :user_answer => @question.answer_3) %>
     <%= link_to @question.answer_4, question_path(@question, :user_answer => @question.answer_1) %>
   <% end %>
