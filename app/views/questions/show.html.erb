@@ -1,0 +1,5 @@
+<p>This is the <%= @question.type %> round. <%= @question.question %></p>
+<% if @question.tf? === true %>
+  <%= link_to "True", question_path(@question, :user_answer => "true", :correct_score => 1000, :incorrect_score => 900) %>
+  <%= link_to "False", question_path(@question, :user_answer => "false", :correct_score => 1000, :incorrect_score => 900) %>
+<%= end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :questions
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "rounds#index"
+  resources :rounds, only: [:show]
+  resources :players
+  resources :questions, only: [:show, :index]
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307195131) do
+ActiveRecord::Schema.define(version: 20170308000322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20170307195131) do
     t.string   "topic"
     t.integer  "round"
     t.string   "player"
-    t.boolean  "fitb?"
-    t.boolean  "mc?"
-    t.boolean  "tf?"
-    t.boolean  "finished?"
+    t.boolean  "fitb"
+    t.boolean  "mc"
+    t.boolean  "tf"
+    t.boolean  "finished"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
