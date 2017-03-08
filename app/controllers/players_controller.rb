@@ -1,17 +1,72 @@
 class PlayersController < ApplicationController
 
+  @answer_1 = nil
+  @answer_2 = nil
+  @answer_3 = nil
+  @answer_4 = nil
+
+  def shuffle_multiple_choice(question)
+    wrong_answers = question["incorrect_answers"]
+    all_answers = wrong_answers.push(question["correct_answer"])
+    number = rand(all_answers.length)
+    @answer_1 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    number = rand(all_answers.length)
+    @answer_2 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    number = rand(all_answers.length)
+    @answer_3 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    number = rand(all_answers.length)
+    @answer_4 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    binding.pry
+  end
+
+  def shuffle_true_false(question)
+    wrong_answers = question["incorrect_answers"]
+    all_answers = wrong_answers.push(question["correct_answer"])
+    number = rand(all_answers.length)
+    @answer_1 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    number = rand(all_answers.length)
+    @answer_2 = HTMLEntities.new.decode(all_answers[rand(number - 1)])
+    all_answers.delete(number)
+    number = rand(all_answers.length)
+  end
+
+
   def make_questions(player1, player2)
     question1_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
-    question2_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False")
 
-    question1_question = HTMLEntities.new.decode(question1_api["question"])
+    shuffle_true_false(question1_api)
 
-    question1 = Question.create(question: question1_question, answer_correct: "True", answer_1: "True", answer_2: "False", correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "geography", player: player1.name, correct_score: 1000, incorrect_score: 900)
+    question1 = Question.create(question: HTMLEntities.new.decode(question1_api["question"]), answer_correct: HTMLEntities.new.decode(question1_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: question1_api["category"], player: player1.name, correct_score: 1000, incorrect_score: 900)
+
+    question2_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
+
+    shuffle_true_false(question2_api)
+
+    question2 = Question.create(question: HTMLEntities.new.decode(question2_api["question"]), answer_correct: HTMLEntities.new.decode(question2_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 2, topic: question2_api["category"], player: player2.name, correct_score: 1000, incorrect_score: 900)
+
+    question3_api = TriviaDB.new().get_TriviaDB("Sports", "easy", "Multiple Choice").first()
+
+    shuffle_multiple_choice(question3_api)
+
+    question3 = Question.create(question: HTMLEntities.new.decode(question3_api["question"]), answer_correct: HTMLEntities.new.decode(question3_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, answer_3: @answer_3, answer_4: @answer_4, correct_response: "Well done.", wrong_response: "Terrible.", number: 3, topic: question3_api["category"], player: player1.name)
+
+    question4_api = TriviaDB.new().get_TriviaDB("Sports", "easy", "Multiple Choice").first()
+
+    shuffle_multiple_choice(question4_api)
+
+    question4 = Question.create(question: HTMLEntities.new.decode(question4_api["question"]), answer_correct: HTMLEntities.new.decode(question4_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, answer_3: @answer_3, answer_4: @answer_4, correct_response: "Well done.", wrong_response: "Terrible.", number: 4, topic: question4_api["category"], player: player2.name)
+
     binding.pry
-    question2 = Question.create(question: "Who framed roger rabit?", answer_correct: "Me", answer_1: "You", answer_2: "Me", answer_3: "Him", answer_4: "Her", correct_response: "Good Job.", wrong_response: "You suck.", number: 2, topic: "general knowledge", player: player2.name)
-    question3 = Question.create(question: "Where in the world is carmen san diego?", answer_correct: "San Diego", answer_1: "Carmen", answer_2: "Hell", answer_3: "San Diego", answer_4: "Springfield", correct_response: "Well done.", wrong_response: "Terrible.", number: 3, topic: "geography", player: player1.name, correct_score: 1000, incorrect_score: 900)
-    question4 = Question.create(question: "Where is Lucifer?", answer_correct: "Hell", answer_1: "Carmen", answer_2: "Hell", answer_3: "San Diego", answer_4: "Springfield", correct_response: "Well done.", wrong_response: "Terrible.", number: 4, topic: "geography", player: player2.name, correct_score: 1000, incorrect_score: 900)
 
+    # question5_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
+    # question6_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
+    # question7_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
+    # question8_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
 
 
   end
