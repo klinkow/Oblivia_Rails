@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "rounds#index"
-  resources :rounds, only: [:show]
+  resources :rounds
   resources :players
-  resources :questions, only: [:show, :index]
+  resources :questions
 end
