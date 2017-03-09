@@ -11,6 +11,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rest-client'
 gem 'htmlentities'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'fuzzy-string-match', '~> 0.9.7'
 
 group :development, :test do
   gem 'byebug', platform: :mri

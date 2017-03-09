@@ -81,6 +81,7 @@ class PlayersController < ApplicationController
   end
 
 
+
   def index
     @player1 = (Player.find_by number:1)
     @player2 = (Player.find_by number:2)
@@ -96,6 +97,7 @@ class PlayersController < ApplicationController
     if player_params[:number] === "2"
       @player.save
       make_questions((Player.find_by number:1), @player)
+      # @newses = Nytimes.new().get_NYT()
       redirect_to question_path(Question.find_by number:1)
     elsif @player.save
       redirect_to new_player_path(2)
