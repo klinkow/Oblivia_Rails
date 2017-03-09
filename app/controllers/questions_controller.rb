@@ -9,10 +9,10 @@ class QuestionsController < ApplicationController
       elsif params[:user_answer]
         if params[:user_answer] === @question.answer_correct
           new_score = @player.score + @question.correct_score
-          flash[:success] = "Nice Job!"
+
         else
           new_score = @player.score + @question.incorrect_score
-          flash[:fail] = "Incorrect"
+
         end
         @player.update(score: new_score)
         redirect_to question_path(nextquestion)

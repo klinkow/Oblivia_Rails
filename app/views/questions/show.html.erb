@@ -6,10 +6,12 @@
     <p>But first, how much would you like to wager?</p><br>
   </div>
   <div class="bottom">
-    <%= link_to "0", question_path(@question, :amount_waged => 0) %>
-    <%= link_to "100", question_path(@question, :amount_waged => 100) %>
-    <%= link_to "200", question_path(@question, :amount_waged => 200) %>
-    <%= link_to "400", question_path(@question, :amount_waged => 400) %>
+    <ul>
+      <li><%= link_to "0", question_path(@question, :amount_waged => 0) %></li>
+      <li><%= link_to "100", question_path(@question, :amount_waged => 100) %></li>
+      <li><%= link_to "200", question_path(@question, :amount_waged => 200) %></li>
+      <li><%= link_to "400", question_path(@question, :amount_waged => 400) %></li>
+    </ul>
   </div>
   <% else %>
   <div class="question">
