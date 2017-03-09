@@ -1,20 +1,31 @@
-<div class="card">
+<div class="top">
   <p><%= @player.name %>, here is a <%= @question.topic %> question:</p><br>
-  <% if @question.correct_score === nil %>
-    <p>But first, how much would you like to wager?</p><br>
 </div>
-<div class="bottom">
+  <% if @question.correct_score === nil %>
+  <div class="question">
+    <p>But first, how much would you like to wager?</p><br>
+  </div>
+  <div class="bottom">
     <%= link_to "0", question_path(@question, :amount_waged => 0) %>
     <%= link_to "100", question_path(@question, :amount_waged => 100) %>
     <%= link_to "200", question_path(@question, :amount_waged => 200) %>
     <%= link_to "400", question_path(@question, :amount_waged => 400) %>
+  </div>
   <% else %>
-    <p><%= @question.question %></p>
-    <%= link_to @question.answer_1, question_path(@question, :user_answer => @question.answer_1) %>
-    <%= link_to @question.answer_2, question_path(@question, :user_answer => @question.answer_2) %>
-    <% if @question.answer_3 %>
-      <%= link_to @question.answer_3, question_path(@question, :user_answer => @question.answer_3) %>
-      <%= link_to @question.answer_4, question_path(@question, :user_answer => @question.answer_1) %>
-    <% end %>
+  <div class="question">
+    <h3><%= @question.question %></h3>
+    <h3><span class="flash-success"><%= flash[:success] %></span></h3>
+    <h3><span class="flash-fail"><%= flash[:fail] %></span></h3>
+  </div>
+  <div class="bottom">
+    <ul>
+      <li><%= link_to @question.answer_1, question_path(@question, :user_answer => @question.answer_1) %></li>
+      <li><%= link_to @question.answer_2, question_path(@question, :user_answer => @question.answer_2) %></li>
+      <% if @question.answer_3 %>
+        <li><%= link_to @question.answer_3, question_path(@question, :user_answer => @question.answer_3) %></li>
+        <li><%= link_to @question.answer_4, question_path(@question, :user_answer => @question.answer_1) %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
 </div>

@@ -9,13 +9,15 @@
   </head>
 
   <body>
-
       <% @player1 = Player.find_by number: 1 %>
       <% @player2 = Player.find_by number: 2 %>
       <% if @player2 %>
-        <div class="card">
-          <p><%= @player1.name %>'s score: <%= @player1.score %> | <%= @player2.name %>'s score: <%= @player2.score %>
-        </div><br>
+        <div class="navbar">
+          <ul>
+            <li><%= @player1.name %>'s score: <%= @player1.score %></li>
+            <li><%= @player2.name %>'s score: <%= @player2.score %></li>
+          </ul>
+        </div>
       <% end %>
       <%= yield %>
 

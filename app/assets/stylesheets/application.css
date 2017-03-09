@@ -55,8 +55,8 @@ body {
   font-family: 'Amatic SC', cursive;
   background: black;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 input {
@@ -80,21 +80,76 @@ h3 {
   font-size: 6vh;
 }
 
-p, label, a {
+p, label, a, li {
   font-size: 5vh;
 }
 
-.bottom {
-  position: absolute;
-  bottom: 20vh;
-  text-align: center;
-}
 
 .card {
+  border:   1px solid white;
   margin: 8vh 2vh 2vh 2vh;
   text-align: center;
   width: 25%
 }
+
+
+.navbar {
+  position: absolute;
+
+  top: 0;
+}
+
+.top {
+  position: absolute;
+  top: 10%;
+
+}
+
+.flash-success {
+  color: green;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+.flash-fail {
+  color: red;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+.question {
+  position: absolute;
+  top: 30%;
+  width: 60%;
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+
+  bottom: 10%;
+}
+
+li {
+  padding: 2vw;
+  margin: 2vw;
+  display: inline;
+  color: white;
+}
+
+.navbar li {
+  padding: 3.5vw;
+  margin: 3.5vw;
+}
+
 
 @-webkit-keyframes pulse {
   25% {
@@ -146,17 +201,17 @@ input[type="text"]:focus {
 
 
 @-webkit-keyframes fadeOut {
-   0% {opacity: .6;}
+   0% {opacity: .9;}
    100% {opacity: 0;}
 }
 
 @keyframes fadeOut {
-   0% {opacity: .6;}
+   0% {opacity: .9;}
    100% {opacity: 0;}
 }
 
 .fadeOut {
-  -webkit-animation-duration: .4s;
+  -webkit-animation-duration: .5s;
   animation-duration: .4s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
