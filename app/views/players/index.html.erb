@@ -1,5 +1,7 @@
-<% if @player1.score > @player2.score %>
-<h1>Congradulations <%= @player1.name %>, you are the winner!</h1>
-<% elsif @player2.score > @player1.score %>
-<h1>Congradulations <%= @player2.name %>, you are the winner!</h1>
-<% end %>
+<div class="card">
+  <% if @player1.score > @player2.score %>
+  <h1>Congradulations <%= @player1.name %>, you are the winner!</h1>
+  <% elsif @player2.score > @player1.score %>
+  <h1>Congradulations <%= @player2.name %>, you are the winner!</h1>
+  <% end %>
+</div>

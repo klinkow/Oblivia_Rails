@@ -1,12 +1,15 @@
-<h1>Oblivia</h1>
-<h3>(trivia)</h3>
-<%= form_for @player do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <!-- <%= f.label :color %>
-  <%= f.text_field :color %>
-  <%= f.label :nerd_type %>
-  <%= f.text_field :nerd_type %> -->
-  <%= f.text_field :number, value: @number, type: "hidden" %>
-  <%= f.submit "Next"%>
-<% end %>
+<div class="card">
+  <h1>Oblivia</h1>
+</div>
+<div class="bottom">
+  <p>Player <span class="pulse"><%= @number %></span>, enter your name:</p>
+  <%= form_for @player do |f| %>
+    <%= f.text_field :name %>
+    <!-- <%= f.label :color %>
+    <%= f.text_field :color %>
+    <%= f.label :nerd_type %>
+    <%= f.text_field :nerd_type %> -->
+    <%= f.text_field :number, value: @number, type: "hidden" %>
+    <%= f.submit "Next"%>
+  <% end %>
+</div>

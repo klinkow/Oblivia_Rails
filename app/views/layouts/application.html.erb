@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="card">
+    
       <% @player1 = Player.find_by number: 1 %>
       <% @player2 = Player.find_by number: 2 %>
       <% if @player2 %>
@@ -17,6 +17,6 @@
         <p><%= @player2.name %>'s score: <%= @player2.score %></p><br><br>
       <% end %>
       <%= yield %>
-    </div>
+
   </body>
 </html>
