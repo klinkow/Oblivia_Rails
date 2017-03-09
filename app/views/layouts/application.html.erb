@@ -3,17 +3,20 @@
   <head>
     <title>ObliviaRails</title>
     <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% @player1 = Player.find_by number: 1 %>
-    <% @player2 = Player.find_by number: 2 %>
-    <% if @player2 %>
-      <p><%= @player1.name %>'s score: <%= @player1.score %></p>
-      <p><%= @player2.name %>'s score: <%= @player2.score %></p><br><br>
-    <% end %>
-    <%= yield %>
+    <div class="card">
+      <% @player1 = Player.find_by number: 1 %>
+      <% @player2 = Player.find_by number: 2 %>
+      <% if @player2 %>
+        <p><%= @player1.name %>'s score: <%= @player1.score %></p>
+        <p><%= @player2.name %>'s score: <%= @player2.score %></p><br><br>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
