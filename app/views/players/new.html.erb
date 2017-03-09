@@ -1,5 +1,8 @@
 <div class="card">
   <h1>Oblivia</h1>
+  <% if @number===2 %>
+  <%= image_tag("creepy_face", class: "fadeOut") %>
+  <% end %>
 </div>
 <div class="bottom">
   <p>Player <span class="pulse"><%= @number %></span>, enter your name:</p>
@@ -10,6 +13,6 @@
     <%= f.label :nerd_type %>
     <%= f.text_field :nerd_type %> -->
     <%= f.text_field :number, value: @number, type: "hidden" %>
-    <%= f.submit "Next"%>
+    <%= f.submit "Next", type: "hidden"%>
   <% end %>
 </div>

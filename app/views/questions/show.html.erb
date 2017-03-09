@@ -1,8 +1,7 @@
 <div class="card">
-  <p><%= @player.name %>, it is your turn</p><br>
-  <p>This is the <%= @question.topic %> round.</p>
+  <p><%= @player.name %>, here is a <%= @question.topic %> question:</p><br>
   <% if @question.correct_score === nil %>
-    <p><%= @question.player %>, how much would you like to wager?</p><br>
+    <p>But first, how much would you like to wager?</p><br>
 </div>
 <div class="bottom">
     <%= link_to "0", question_path(@question, :amount_waged => 0) %>

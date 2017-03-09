@@ -45,11 +45,11 @@ a {
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
 }
+
 a:hover, a:focus, a:active {
   -webkit-transform: skew(-10deg);
   transform: skew(-10deg);
 }
-
 
 body {
   font-family: 'Amatic SC', cursive;
@@ -59,21 +59,29 @@ body {
   flex-wrap: wrap;
 }
 
-h1, h3, p, label {
+input {
+  font-family: 'Amatic SC', cursive;
+
+  text-align: center;
+  font-size: 4.5vh;
+}
+
+h3, p, label {
   font-weight: normal;
   color: white;
 }
 
 h1 {
-  font-size: 5vw;
+  font-size: 12vh;
+  color: white;
 }
 
 h3 {
-  font-size: 3.5vw;
+  font-size: 6vh;
 }
 
 p, label, a {
-  font-size: 2.5vw;
+  font-size: 5vh;
 }
 
 .bottom {
@@ -83,8 +91,7 @@ p, label, a {
 }
 
 .card {
-  padding: 10px;
-  margin: 10px;
+  margin: 8vh 2vh 2vh 2vh;
   text-align: center;
   width: 25%
 }
@@ -124,4 +131,35 @@ p, label, a {
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+}
+
+input[type="text"] {
+  border: solid 1vh white;
+  border-radius: 3vh;
+  box-shadow: 0 0 5px 1px white;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px white;
+}
+
+
+@-webkit-keyframes fadeOut {
+   0% {opacity: .6;}
+   100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+   0% {opacity: .6;}
+   100% {opacity: 0;}
+}
+
+.fadeOut {
+  -webkit-animation-duration: .4s;
+  animation-duration: .4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
 }
