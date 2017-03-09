@@ -20,7 +20,6 @@ class PlayersController < ApplicationController
     number = rand(all_answers.length)
     @answer_4 = HTMLEntities.new.decode(all_answers[(number)])
     all_answers.delete_at(number)
-    binding.pry
   end
 
   def shuffle_true_false(question)
@@ -59,16 +58,32 @@ class PlayersController < ApplicationController
     question4 = Question.create(question: HTMLEntities.new.decode(question4_api["question"]), answer_correct: HTMLEntities.new.decode(question4_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, answer_3: @answer_3, answer_4: @answer_4, correct_response: "Well done.", wrong_response: "Terrible.", number: 4, topic: question4_api["category"], player: player2.name)
 
 
-    # question5_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
-    # question6_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
-    # question7_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
-    # question8_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
+    question5_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
+    shuffle_multiple_choice(question5_api)
+    question5 = Question.create(question: HTMLEntities.new.decode(question5_api["question"]), answer_correct: HTMLEntities.new.decode(question5_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, answer_3: @answer_3, answer_4: @answer_4, correct_response: "Well done.", wrong_response: "Terrible.", number: 5, topic: question5_api["category"], player: player1.name)
 
 
+    question6_api = TriviaDB.new().get_TriviaDB("Science", "medium", "Multiple Choice").first()
+    shuffle_multiple_choice(question6_api)
+    question6 = Question.create(question: HTMLEntities.new.decode(question6_api["question"]), answer_correct: HTMLEntities.new.decode(question6_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, answer_3: @answer_3, answer_4: @answer_4, correct_response: "Well done.", wrong_response: "Terrible.", number: 6, topic: question6_api["category"], player: player2.name)
+
+
+    question7_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
+    shuffle_true_false(question7_api)
+    question7 = Question.create(question: HTMLEntities.new.decode(question7_api["question"]), answer_correct: HTMLEntities.new.decode(question7_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 7, topic: question7_api["category"], player: player1.name)
+
+
+    question8_api = TriviaDB.new().get_TriviaDB("General Knowledge", "medium", "True/False").first()
+    shuffle_true_false(question8_api)
+    question8 = Question.create(question: HTMLEntities.new.decode(question8_api["question"]), answer_correct: HTMLEntities.new.decode(question8_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 8, topic: question8_api["category"], player: player2.name)
+
+    question9 = Question.create(question: "bogus question", number: 9)
   end
 
 
   def index
+    @player1 = (Player.find_by number:1)
+    @player2 = (Player.find_by number:2)
   end
 
   def new

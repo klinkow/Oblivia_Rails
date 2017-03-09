@@ -1,13 +1,12 @@
-<p><%= @question.player %> score: <%= @player.score %></p>
-
+<p>This is the <%= @question.topic %> round.</p>
 <% if @question.correct_score === nil %>
-  <p>This is the <%= @question.topic %> round. <%= @question.player %>, how much would you like to wager?</p><br>
+  <p><%= @question.player %>, how much would you like to wager?</p><br>
   <%= link_to "0", question_path(@question, :amount_waged => 0) %>
   <%= link_to "100", question_path(@question, :amount_waged => 100) %>
   <%= link_to "200", question_path(@question, :amount_waged => 200) %>
   <%= link_to "400", question_path(@question, :amount_waged => 400) %>
 <% else %>
-  <p>This is the <%= @question.topic %> round. <%= @question.question %></p>
+  <p><%= @question.question %></p>
   <%= link_to @question.answer_1, question_path(@question, :user_answer => @question.answer_1) %>
   <%= link_to @question.answer_2, question_path(@question, :user_answer => @question.answer_2) %>
   <% if @question.answer_3 %>
