@@ -144,6 +144,10 @@ li {
   bottom: 10%;
 }
 
+#player_name {
+  margin: 3vh;
+}
+
 @-webkit-keyframes pulse {
   25% {
     -webkit-transform: scale(1.1);

@@ -38,7 +38,7 @@ class PlayersController < ApplicationController
 
     nytimesarticles = Nytimes.new().get_NYT()
     question1_api = Nytimes.new().sort_us_politics(nytimesarticles)
-    question1 = Question.create(question: HTMLEntities.new.decode(question1_api[3]), answer_correct: HTMLEntities.new.decode(question1_api[1]), answer_1: question1_api[4][0], answer_2: HTMLEntities.new.decode(question1_api[1]), answer_3: question1_api[4][1], answer_4: question1_api[4][2], correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "NYTimes", player: player1.name, correct_score: 500, incorrect_score: 0)
+    question1 = Question.create(question: HTMLEntities.new.decode(question1_api[3]), answer_correct: HTMLEntities.new.decode(question1_api[1]), answer_1: question1_api[4][3], answer_2: HTMLEntities.new.decode(question1_api[1]), answer_3: question1_api[4][1], answer_4: question1_api[4][2], correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "NYTimes", player: player1.name, correct_score: 500, incorrect_score: 0)
 
     # question1_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
     # shuffle_true_false(question1_api)

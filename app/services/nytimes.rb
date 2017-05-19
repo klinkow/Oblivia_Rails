@@ -10,7 +10,7 @@ class Nytimes
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     uri.query = URI.encode_www_form({
-      "api-key" => ENV['NYT_TOP_STORIES'],
+      "api-key" => "3ed9debd7fd447c1a4f39fd1fa0a3541",
       "callback" => "article"
     })
     request = Net::HTTP::Get.new(uri.request_uri)
