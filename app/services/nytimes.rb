@@ -1,24 +1,56 @@
-# class Nytimes
-#   require 'fuzzystringmatch'
-#   fuzzy = FuzzyStringMatch::JaroWinkler.create(:native)
-#
-#
-#
-#
-#   def get_NYT
-#     uri = URI("https://api.nytimes.com/svc/topstories/v2/home.json")
-#     http = Net::HTTP.new(uri.host, uri.port)
-#     http.use_ssl = true
-#     uri.query = URI.encode_www_form({
-#       "api-key" => ENV['NYT_TOP_STORIES'],
-#       "callback" => "article"
-#     })
-#     request = Net::HTTP::Get.new(uri.request_uri)
-#     @result = JSON.parse(http.request(request).body)
-#     @results = @result["results"]
-#     return @results
-#   end
-#
+class Nytimes
+  require 'fuzzystringmatch'
+  fuzzy = FuzzyStringMatch::JaroWinkler.create(:native)
+
+
+
+
+  def get_NYT
+    uri = URI("https://api.nytimes.com/svc/topstories/v2/home.json")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    uri.query = URI.encode_www_form({
+      "api-key" => ENV['NYT_TOP_STORIES'],
+      "callback" => "article"
+    })
+    request = Net::HTTP::Get.new(uri.request_uri)
+    @result = JSON.parse(http.request(request).body)
+    @results = @result["results"]
+    return @results
+  end
+
+
+  def sort_us_politics (articles)
+    result = []
+    # result = ["article found", lastName, headline, blankHeadline, lastNames]
+    lastNames = []
+    articles.each do |article|
+      if article['per_facet'] != [] && article['section'] === "U.S." && article['subsection'] === "Politics"
+        headlineWords = article['title'].split(" ")
+        lastName = article['per_facet'].first().split(",").first()
+        lastNames.push(lastName)
+        headline = article['title']
+        headlineWords.each do |word|
+          # if fuzzy.getDistance(lastName, word) > 0.8
+          if lastName === word && result[0] != "article found"
+            blankSpaceIndex = headlineWords.index(word)
+            headlineWords.slice!(blankSpaceIndex)
+            headlineWordsBlanked = headlineWords.insert(blankSpaceIndex, "________")
+            blankHeadline = headlineWordsBlanked.join(" ")
+            result.push(lastName, headline, blankHeadline)
+            result.unshift("article found")
+          end
+        end
+      end
+    end
+    lastNames.each do |name|
+      if name === result[1]
+        lastNames.delete_at(lastNames.index(name))
+      end
+    end
+    result.push(lastNames)
+    return result
+  end
 #
 #   def sort_us_politics(articles)
 #     results = []
@@ -76,4 +108,4 @@
 #   end
 #
 #
-# end
+end

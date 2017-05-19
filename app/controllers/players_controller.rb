@@ -35,17 +35,18 @@ class PlayersController < ApplicationController
 
 
   def make_questions(player1, player2)
-    question1_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
-    shuffle_true_false(question1_api)
-    question1 = Question.create(question: HTMLEntities.new.decode(question1_api["question"]), answer_correct: HTMLEntities.new.decode(question1_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: question1_api["category"], player: player1.name, correct_score: 1000, incorrect_score: 900)
 
+    nytimesarticles = Nytimes.new().get_NYT()
+    question1_api = Nytimes.new().sort_us_politics(nytimesarticles)
+    question1 = Question.create(question: HTMLEntities.new.decode(question1_api[3]), answer_correct: HTMLEntities.new.decode(question1_api[1]), answer_1: question1_api[4][0], answer_2: HTMLEntities.new.decode(question1_api[1]), answer_3: question1_api[4][1], answer_4: question1_api[4][2], correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: "NYTimes", player: player1.name, correct_score: 500, incorrect_score: 0)
 
+    # question1_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
+    # shuffle_true_false(question1_api)
+    # question1 = Question.create(question: HTMLEntities.new.decode(question1_api["question"]), answer_correct: HTMLEntities.new.decode(question1_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 1, topic: question1_api["category"], player: player1.name, correct_score: 1000, incorrect_score: 900)
 
     question2_api = TriviaDB.new().get_TriviaDB("General Knowledge", "easy", "True/False").first()
     shuffle_true_false(question2_api)
-    question2 = Question.create(question: HTMLEntities.new.decode(question2_api["question"]), answer_correct: HTMLEntities.new.decode(question2_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 2, topic: question2_api["category"], player: player2.name, correct_score: 1000, incorrect_score: 900)
-
-
+    question2 = Question.create(question: HTMLEntities.new.decode(question2_api["question"]), answer_correct: HTMLEntities.new.decode(question2_api["correct_answer"]), answer_1: @answer_1, answer_2: @answer_2, correct_response: "Well done.", wrong_response: "Terrible.", number: 2, topic: question2_api["category"], player: player2.name, correct_score: 500, incorrect_score: 0)
 
     question3_api = TriviaDB.new().get_TriviaDB("Sports", "easy", "Multiple Choice").first()
     shuffle_multiple_choice(question3_api)
@@ -93,11 +94,10 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params.merge(score: 0, latest_score: 0))
+    @player = Player.new(player_params.merge(score: 500, latest_score: 0))
     if player_params[:number] === "2"
       @player.save
       make_questions((Player.find_by number:1), @player)
-      # @newses = Nytimes.new().get_NYT()
       redirect_to question_path(Question.find_by number:1)
     elsif @player.save
       redirect_to new_player_path(2)

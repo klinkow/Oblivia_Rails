@@ -83,6 +83,17 @@ p, label, a, li {
   font-size: 5vh;
 }
 
+li {
+  padding: 2vw;
+  margin: 2vw;
+  display: inline;
+  color: white;
+}
+
+.navbar li {
+  padding: 3.5vw;
+  margin: 3.5vw;
+}
 
 .card {
   margin: 8vh 2vh 2vh 2vh;
@@ -132,19 +143,6 @@ p, label, a, li {
   position: absolute;
   bottom: 10%;
 }
-
-li {
-  padding: 2vw;
-  margin: 2vw;
-  display: inline;
-  color: white;
-}
-
-.navbar li {
-  padding: 3.5vw;
-  margin: 3.5vw;
-}
-
 
 @-webkit-keyframes pulse {
   25% {
